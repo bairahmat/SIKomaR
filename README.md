@@ -1,2 +1,2 @@
-# SIKomaR
-## (Sistem Komunikasi Antar Rakyat )
+# SIKomaR 
+(Sistem Komunikasi Antar Rakyat )

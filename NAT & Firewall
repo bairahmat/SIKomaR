@@ -1,0 +1,16 @@
+# NAT dan Firewall Asterisk
+
+Network Address Translation (NAT) server sering merepotkan untuk konfigurasi SIP. 
+Masalah yang mungkin ditemukan adalah konektivitas VoIP yang buruk atau tidak ada konektivitas sama sekali karena konektivitas diblokir oleh Firewall / NAT. Bila hal seperti ini terjadi, Anda harus melakukan hal berikut:
+pastikan perangkat lunak antivirus atau firewall yang aktif di PC Anda tidak menghalangi VoIP
+
+Hubungi administrator jaringan Anda dan katakan kepadanya untuk mengaktifkan NAT untuk Anda atau memberi Anda IP Publik, 
+dan buka port berikut ini:
+
+Untuk SIP:
+UDP port 3478 and 3479 (STUN, NAT type discovery) 
+UDP port 5060 and 5066 (SIP, signaling) 
+UDP port 8000 to 20000 (RTP, data, voice + video)
+
+Untuk IAX2:
+UDP port 4569 (IAX2, signaling and data)

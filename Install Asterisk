@@ -15,7 +15,7 @@ Download the core package and extra
   unzip extra.zip
 
 Kalau di server anda belum ada paket aplikasi unzip silahkan install paket aplikasi unzip
-  apt-get install unizp
+  apt-get install unzip
 
   chown -R asterisk.asterisk /var/lib/asterisk/sounds/en
   find /var/lib/asterisk/sounds/en -type d -exec chmod 0775 {} \;

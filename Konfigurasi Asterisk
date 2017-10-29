@@ -1,0 +1,93 @@
+# Konfigurasi Asterisk
+
+Setelah Asterisk terpasang, kita perlu mengkonfigurasinya sehingga fungsi Asterisk seperti yang kita inginkan. 
+Semua file yang kita butuhkan untuk mengkonfigurasi disimpan dalam folder: /etc/asterisk
+
+Minimal File konfigurasi yang perlu diedit adalah:
+  sip.conf - untuk otentikasi pengguna dengan nomor telepon dan kata sandi.
+  extensions.conf - untuk mengatur dialplan.
+  enum.conf - untuk ENUM, misalnya untuk kode negara +62.
+
+Konfigurasi ENUM.CONF
+Tidak banyak yang bisa diubah di ENUM.CONF. Namun, kita perlu memastikan bahwa ada beberapa entri berikut:
+  search => e164.arpa
+  search => e164.org
+  search => e164.or.id
+
+Konfigurasi SIP.CONF
+Buat file sip.conf baru dengan membackup sip.conf aslinya
+  mv /etc/asterisk/sip.conf /etc/asterisk/sip-asli.conf
+
+Membuat file sip.conf baru :
+  pico /etc/asterisk/sip.conf
+
+[general]
+context=default
+allowoverlap=no
+allowguest=yes
+canreinvite=yes
+allowanonymous=yes
+bindport=5060
+bindaddr=0.0.0.0
+udpbindaddr=0.0.0.0
+srvlookup=yes
+nat=no
+directmedia=no
+qualify=yes
+allowexternaldomains=yes
+externip=xx.xx.xx.xx/xx
+localnet=10.0.0.0/255.0.0.0
+localnet=172.16.0.0/12
+localnet=192.168.0.0/255.255.0.0
+localnet=169.254.0.0/255.255.0.0
+
+;enable jenis codec yang digunakan
+disallow=all
+allow=alaw
+allow=ulaw
+allow=gsm
+allow=g711
+allow=g723
+allow=g729
+allow=h263
+allow=h263p
+
+;enable vidoe call
+videosupport=yes
+allowexternalinvites=yes
+
+;ini adalah nomor user yang dibuat (memakai nomor 1001&9004)
+
+[1001]
+context=default
+type=friend
+username=1001
+secret=1001
+host=dynamic
+callerid=[Tes-1]
+
+[1002]
+context=default
+type=friend
+username=1002
+secret=1002
+host=dynamic
+dtmfmode=rfc2833
+callerid=[Tes-2]
+
+Konfigurasi EXTENSIONS.CONF
+Tambahkan di /etc/asterisk/extensions.conf
+  pico /etc/asterisk/extensions.conf
+
+[default]
+exten => 1001,1,Answer
+exten => 1001,2,Dial(SIP/1001,30,tr)
+exten => 1001,3,Hangup
+
+exten => 1002,1,Answer
+exten => 1002,2,Dial(SIP/1002,30,tr)
+exten => 1002,3,Hangup
+
+Restart Asterisk 
+  service asterisk restart
+

@@ -1,1 +1,15 @@
-SIKomaR
+# SIKomaR di Debian 8
+
+Install Asterisk Softswitch
+  apt-get install asterisk asterisk-dev asterisk-config dahdi
+
+Untuk menginstal suara, Anda harus terhubung ke server Asterisk melalui klien SSH sebagai root.
+Begitu berada di dalam server, buatlah direktori untuk file audio.
+  mkdir /var/lib/asterisk/sounds/en
+
+Download the core package and extra
+  cd /var/lib/asterisk/sounds/en
+  wget -O core.zip https://www.asterisksounds.org/en/download/asterisk-sounds-core-en-sln16.zip
+  wget -O extra.zip https://www.asterisksounds.org/en/download/asterisk-sounds-extra-en-sln16.zip
+  unzip core.zip
+  unzip extra.zip
